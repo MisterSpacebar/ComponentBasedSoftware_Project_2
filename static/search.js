@@ -7,7 +7,9 @@ $(document).ready(function() {
         method: 'POST',
         success: function(data) {
             // Store the autocomplete data in the `items` variable
-            items = JSON.parse(data);
+            console.log(data);
+            items = data;
+
 
             // Set up the autocomplete search bar
             $('#search-bar').typeahead({
