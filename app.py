@@ -23,12 +23,13 @@ def index():
     return render_template('index.html')
 
 # returns data for autocomplete
-@app.route('/autocomplete', methods=['POST'])
+@app.route('/autocomplete', methods=['GET','POST'])
 def autocomplete():
     items = get_autocomplete_items()
-    query = request.form['query']
-    results = [item for item in items if query.lower() in item.lower()]
-    return jsonify(results)
+    #query = request.form['query']
+    #results = [item for item in items if query.lower() in item.lower()]
+    #return jsonify(results)
+    return items
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

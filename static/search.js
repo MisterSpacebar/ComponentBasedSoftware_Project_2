@@ -1,18 +1,27 @@
 $(document).ready(function() {
-    // Set up the autocomplete search bar
-    $('#search-bar').typeahead({
-        source: function(query, process) {
-            // Send an AJAX request to the Flask endpoint to get the autocomplete data
-            $.ajax({
-                url: '/autocomplete',
-                method: 'POST',
-                data: {'query': query},
-                success: function(data) {
-                    // Process the data and return it for the autocomplete search bar
-                    var items = JSON.parse(data);
-                    return process(items);
-                }
+    console.log('Document ready!');
+    // get autocomplete list
+    let items = []
+    $.ajax({
+        url: '/autocomplete',
+        method: 'POST',
+        success: function(data) {
+            // Store the autocomplete data in the `items` variable
+            items = JSON.parse(data);
+
+            // Set up the autocomplete search bar
+            $('#search-bar').typeahead({
+                source: items
             });
+            console.log('List ready!');
         }
+    });
+
+    // Handle form submission
+    $('#search-form').submit(function(event) {
+        event.preventDefault();
+        var query = $('#search-bar').val();
+        console.log('Searching for:', query);
+        // Perform search with query...
     });
 });
