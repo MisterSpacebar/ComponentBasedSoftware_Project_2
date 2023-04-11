@@ -19,6 +19,7 @@ def get_autocomplete_items():
 def index():
     return render_template('index.html')
 
+# returns data for autocomplete
 @app.route('/autocomplete', methods=['POST'])
 def autocomplete():
     items = get_autocomplete_items()
