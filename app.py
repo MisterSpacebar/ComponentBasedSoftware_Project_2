@@ -13,7 +13,10 @@ app.config['SECRET_KEY']=os.urandom(16).hex()
 
 def get_autocomplete_items():
     data = main_functions.read_from_file("item_data.json")
-    return data["data"]
+    autocomplete_items = []
+    for item in data["data"]:
+        autocomplete_items.append(item["name"])
+    return autocomplete_items
 
 @app.route('/')
 def index():
