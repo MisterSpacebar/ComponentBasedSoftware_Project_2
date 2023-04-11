@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, jsonify
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, SelectField, IntegerField
 from wtforms.validators import NumberRange
+import plotly.graph_objs as go
 import main_functions
 import historical
 import requests
@@ -48,6 +49,41 @@ def search_item():
     print(item_id)
     historical_data = historical.amalgamated_historical_data(item_id)
     print(historical_data)
+    return jsonify({'chart_data':historical_data})
+
+@app.route('/chart-average')
+def average_chart():
+    chart_data = request.args.get('chart_data')
+    labels = []
+    for date in chart_data:
+        labels.append(date['date'])
+    buys = []
+    for buy in chart_data:
+        buys.append(buy["average_buys"])
+    sells = []
+    for sell in chart_data:
+        sells.append(sell["average_sells"])
+
+    buy_data = {
+        'label': 'Average Buy',
+        'data': buys,
+        'backgroundColor': 'rgba(255, 99, 132, 0.2)',
+        'borderColor': 'rgba(255, 99, 132, 1)',
+        'borderWidth': 1
+    }
+    sell_data = {
+        'label': 'Dataset 2',
+        'data': sells,
+        'backgroundColor': 'rgba(54, 162, 235, 0.2)',
+        'borderColor': 'rgba(54, 162, 235, 1)',
+        'borderWidth': 1
+    }
+    data = {
+        'labels': labels,
+        'datasets': [buy_data, sell_data]
+    }
+
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
