@@ -18,6 +18,14 @@ def get_autocomplete_items():
         autocomplete_items.append(item["name"])
     return autocomplete_items
 
+def get_id_by_name(name):
+    data = main_functions.read_from_file("item_data.json")
+    for obj in data['data']:
+        if obj["name"] == name:
+            return obj["id"]
+    return None # name not found in data
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -34,10 +42,12 @@ def autocomplete():
 @app.route('/search', methods=['GET','POST'])
 def search_item():
     query = request.form['query']
-    # Perform search with query...
-
-    # Return response as JSON
     print(query)
+    # Match item to item_id
+    item_id = get_id_by_name(query)
+    print(item_id)
+    historical_data = historical.amalgamated_historical_data(item_id)
+    print(historical_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
