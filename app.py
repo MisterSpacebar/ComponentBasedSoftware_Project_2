@@ -31,5 +31,13 @@ def autocomplete():
     #return jsonify(results)
     return items
 
+@app.route('/search', methods=['GET','POST'])
+def search_item():
+    query = request.form['query']
+    # Perform search with query...
+
+    # Return response as JSON
+    print(query)
+
 if __name__ == '__main__':
     app.run(debug=True)

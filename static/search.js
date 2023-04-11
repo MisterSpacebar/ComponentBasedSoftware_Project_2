@@ -10,7 +10,6 @@ $(document).ready(function() {
             console.log(data);
             items = data;
 
-
             // Set up the autocomplete search bar
             $('#search-bar').typeahead({
                 source: items
@@ -19,11 +18,27 @@ $(document).ready(function() {
         }
     });
 
-    // Handle form submission
-    $('#search-form').submit(function(event) {
-        event.preventDefault();
-        var query = $('#search-bar').val();
-        console.log('Searching for:', query);
-        // Perform search with query...
+    $('#search-bar').on('keypress', function(event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            var query = $('#search-bar').text();
+            console.log('Searching for:', query);
+            // Perform search with query...
+
+            // Send query to Flask endpoint
+            $.ajax({
+                url: '/search',
+                method: 'POST',
+                data: {
+                    query: query
+                },
+                success: function(response) {
+                    console.log('Response:', response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
     });
 });
