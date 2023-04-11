@@ -5,9 +5,8 @@ import json
 import main_functions
 
 def get_historical_data(item_id):
-
     response = requests.get("https://api.datawars2.ie/gw2/v1/history?itemID={0}".format(item_id))
-
+    # Returns data if success
     if response.status_code == 200:
         data = json.loads(response.content)
         return data
@@ -48,17 +47,20 @@ def amalgamated_historical_data(item_id):
 
     # Loop through each date in the combined_data dictionary
     for date in combined_data:
-        # Calculate the averages, highs, and lows for the buy and sell prices and quantities
+        # Calculate the averages, highs, and lows for the buy prices
         average_buys = round(sum(combined_data[date]["buys"]) / len(combined_data[date]["buys"]), 2)
         high_buys = max(combined_data[date]["buys"])
         low_buys = min(combined_data[date]["buys"])
+        # Calculate the averages, highs, and lows for the sell prices
         average_sells = round(sum(combined_data[date]["sells"]) / len(combined_data[date]["sells"]), 2)
         high_sells = max(combined_data[date]["sells"])
         low_sells = min(combined_data[date]["sells"])
+        # Calculate the averages, highs, and lows for the buy quantities
         average_buy_quantities = round(
             sum(combined_data[date]["buy_quantities"]) / len(combined_data[date]["buy_quantities"]), 2)
         max_buy_quantities = max(combined_data[date]["buy_quantities"])
         min_buy_quantities = min(combined_data[date]["buy_quantities"])
+        # Calculate the averages, highs, and lows for the sell quantities
         average_sell_quantities = round(
             sum(combined_data[date]["sell_quantities"]) / len(combined_data[date]["sell_quantities"]), 2)
         max_sell_quantities = max(combined_data[date]["sell_quantities"])
