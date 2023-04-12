@@ -22,13 +22,17 @@
 <body>
     <div class="container mt-5">
         <img src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png">
-        <h3>Autocomplete Search Bar</h3>
+        <h3>Search</h3>
         <form type="submit" method="POST" action="/search" id="search-form">
             <div class="form-group">
                 <input type="text" for="item_name" name="item_name" class="form-control" id="search-bar" placeholder="Search...">
             </div>
                 <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
         </form>
+        <div class="item-info">
+            <h3>{{ item_data.name }}</h3>
+            <img src="{{ item_data.icon }}" alt="{{ item_data.name }}">
+        </div>
         <div>
             <-- put graph here -->
             <canvas id="gw2-chart"></canvas>

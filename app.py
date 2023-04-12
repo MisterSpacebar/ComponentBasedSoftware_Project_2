@@ -57,7 +57,8 @@ def search():
     item_id = get_id_by_name(query)
     print(item_id)
     session['item_id'] = item_id
-    return render_template('results.html', name=name)
+    item_data = historical.get_item_data(item_id)
+    return render_template('results.html', name=name, item_data=item_data)
 
 
 @app.route('/chart-average')
@@ -83,7 +84,7 @@ def average_chart():
         'borderWidth': 1
     }
     sell_data = {
-        'label': 'Dataset 2',
+        'label': 'Average Sell',
         'data': sells,
         'backgroundColor': 'rgba(54, 162, 235, 0.2)',
         'borderColor': 'rgba(54, 162, 235, 1)',
@@ -91,7 +92,8 @@ def average_chart():
     }
     data = {
         'labels': labels,
-        'datasets': [buy_data, sell_data]
+        'buy_data': buy_data,
+        'sell_data': sell_data
     }
 
     return jsonify(data)

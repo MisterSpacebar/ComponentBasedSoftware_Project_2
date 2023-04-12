@@ -13,6 +13,13 @@ def get_historical_data(item_id):
     else:
         print(f"Error: {response.status_code} - {response.reason}")
 
+def get_item_data(item_id):
+    response = requests.get("https://api.guildwars2.com/v2/items/{0}".format(item_id))
+    if response.status_code == 200:
+        data = json.loads(response.content)
+        return data
+    else:
+        print(f"Error: {response.status_code} - {response.reason}")
 def amalgamated_historical_data(item_id):
     # Get the relevant dates and data
     today = datetime.date.today()
