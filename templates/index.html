@@ -20,17 +20,19 @@
         <div class="main container-lg">
             <div class="center">
                 <img src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png">
-                <h3>Trading Post Data</h3>
+                <h3 class="page-title">Trading Post Data</h3>
             </div>
             <!--<input type="text" id="search-bar" class="form-control" placeholder="Search...">-->
-            <form type="submit" method="POST" action="/search" id="search-form">
-              <div class="form-group input-group mb-3">
-                  <input type="text" for="item_name" name="item_name" class="form-control" id="search-bar" placeholder="Search...">
-                  <div class="input-group-append">
-                      <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
-                  </div>
-              </div>
-            </form>
+            <div class="search-form">
+                <form type="submit" method="POST" action="/search" id="search-form">
+                    <div class="form-group input-group mb-3">
+                        <input type="text" for="item_name" name="item_name" class="form-control" id="search-bar" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
     </body>

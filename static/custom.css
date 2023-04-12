@@ -2,6 +2,20 @@
     text-align:center;
 }
 
-.main {
+.search-form {
+    margin-top:15px;
+    margin-bottom:5px;
+    width: 60%;
+    margin: 0 auto;
+}
 
+.item-info {
+    margin-top:5px;
+    margin-bottom:15px;
+    width: 75%;
+}
+
+.page-title {
+    margin-top:5px;
+    margin-bottom:5px;
 }
