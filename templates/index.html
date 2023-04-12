@@ -16,12 +16,18 @@
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='search.js') }}"></script>
 </head>
-<body>
-    <div class="container mt-5">
-        <img src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png">
-        <h3>Autocomplete Search Bar</h3>
-        <input type="text" id="search-bar" class="form-control" placeholder="Search...">
-    </div>
+    <body>
+        <div class="container mt-5">
+            <img src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png">
+            <h3>Autocomplete Search Bar</h3>
+            <!--<input type="text" id="search-bar" class="form-control" placeholder="Search...">-->
+            <form type="submit" method="POST" action="/search" id="search-form">
+              <div class="form-group">
+                <input type="text" for="item_name" name="item_name" class="form-control" id="search-bar" placeholder="Search...">
+              </div>
+              <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
+            </form>
+        </div>
 
-</body>
+    </body>
 </html>

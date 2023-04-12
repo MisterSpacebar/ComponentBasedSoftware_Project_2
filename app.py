@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, session, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, SelectField, IntegerField
 from wtforms.validators import NumberRange
@@ -9,8 +9,9 @@ import requests
 import json
 import os
 
-app = Flask(__name__)
-app.config['SECRET_KEY']=os.urandom(16).hex()
+app = Flask(__name__, static_folder='static')
+app.config['SECRET_KEY'] = os.urandom(16).hex()
+
 
 def get_autocomplete_items():
     data = main_functions.read_from_file("item_data.json")
@@ -19,41 +20,51 @@ def get_autocomplete_items():
         autocomplete_items.append(item["name"])
     return autocomplete_items
 
+
 def get_id_by_name(name):
     data = main_functions.read_from_file("item_data.json")
     for obj in data['data']:
         if obj["name"] == name:
             return obj["id"]
-    return None # name not found in data
+    return None  # name not found in data
 
 
 @app.route('/')
 def index():
+    if request.method == 'POST':
+        name = request.form['name']
+        session['name'] = name
+        return redirect(url_for('results'))
     return render_template('index.html')
 
+
 # returns data for autocomplete
-@app.route('/autocomplete', methods=['GET','POST'])
+@app.route('/autocomplete', methods=['GET', 'POST'])
 def autocomplete():
     items = get_autocomplete_items()
-    #query = request.form['query']
-    #results = [item for item in items if query.lower() in item.lower()]
-    #return jsonify(results)
+    # query = request.form['query']
+    # results = [item for item in items if query.lower() in item.lower()]
+    # return jsonify(results)
     return items
 
-@app.route('/search', methods=['GET','POST'])
-def search_item():
-    query = request.form['query']
+
+@app.route('/search', methods=['POST'])
+def search():
+    name = session.get('name')
+    query = request.form.get('item_name')
     print(query)
     # Match item to item_id
     item_id = get_id_by_name(query)
     print(item_id)
-    historical_data = historical.amalgamated_historical_data(item_id)
-    print(historical_data)
-    return jsonify({'chart_data':historical_data})
+    session['item_id'] = item_id
+    return render_template('results.html', name=name)
+
 
 @app.route('/chart-average')
 def average_chart():
-    chart_data = request.args.get('chart_data')
+    item_id = session['item_id']
+    chart_data = historical.amalgamated_historical_data(item_id)
+
     labels = []
     for date in chart_data:
         labels.append(date['date'])
@@ -84,6 +95,7 @@ def average_chart():
     }
 
     return jsonify(data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
