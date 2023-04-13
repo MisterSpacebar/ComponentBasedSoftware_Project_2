@@ -12,13 +12,13 @@ $(document).ready(function(){
                 data: {
                     labels: data['labels'],
                     datasets: [{
-                        label: 'Average Buys',
+                        label: 'Average Buy Listing Completed',
                         data: data['buy_data']['data'],
                         borderColor: 'purple',
                         fill: false
                     },
                     {
-                        label: 'Average Sells',
+                        label: 'Average Sell Listing Completed',
                         data: data['sell_data']['data'],
                         borderColor: 'teal',
                         fill: false
