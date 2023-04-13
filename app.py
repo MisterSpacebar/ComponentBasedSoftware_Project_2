@@ -61,20 +61,26 @@ def search():
     return render_template('results.html', name=name, item_data=item_data)
 
 
-@app.route('/chart-average')
-def average_chart():
+@app.route('/chart')
+def chart():
     item_id = session['item_id']
     chart_data = historical.amalgamated_historical_data(item_id)
 
-    labels = []
+    dates = []
     for date in chart_data:
-        labels.append(date['date'])
+        dates.append(date['date'])
     buys = []
     for buy in chart_data:
         buys.append(buy["average_buys"])
+    buys_high = []
+    for high in chart_data:
+        buys_high.append(high['high_buys'])
     sells = []
     for sell in chart_data:
         sells.append(sell["average_sells"])
+    buys_high = []
+    for high in chart_data:
+        buys_high.append(high['high_buys'])
 
     buy_data = {
         'label': 'Average Buy',
@@ -91,7 +97,7 @@ def average_chart():
         'borderWidth': 1
     }
     data = {
-        'labels': labels,
+        'labels': dates,
         'buy_data': buy_data,
         'sell_data': sell_data
     }

@@ -26,3 +26,7 @@
     width: 85%;
     margin: 0 auto;
 }
+
+.chart-container {
+    margin-top: 10px;
+}

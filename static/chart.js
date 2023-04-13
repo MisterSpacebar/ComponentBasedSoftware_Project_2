@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $.ajax({
         type: "GET",
-        url: "/chart-average",
+        url: "/chart",
         success: function(data) {
             // Use the data to create your chart
             console.log(data);
@@ -14,13 +14,13 @@ $(document).ready(function(){
                     datasets: [{
                         label: 'Average Buys',
                         data: data['buy_data']['data'],
-                        borderColor: 'red',
+                        borderColor: 'purple',
                         fill: false
                     },
                     {
                         label: 'Average Sells',
                         data: data['sell_data']['data'],
-                        borderColor: 'blue',
+                        borderColor: 'teal',
                         fill: false
                     }]
                 },
