@@ -2,7 +2,6 @@ from flask import Flask, request, render_template, jsonify, session, redirect, u
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, SelectField, IntegerField
 from wtforms.validators import NumberRange
-import plotly.graph_objs as go
 import main_functions
 import historical
 import requests
