@@ -10,16 +10,16 @@ $(document).ready(function(){
             let myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: data['labels'],
+                    labels: data['date'],
                     datasets: [{
                         label: 'Average Buy Listing Completed',
-                        data: data['buy_data']['data'],
+                        data: data['average_buys'],
                         borderColor: 'purple',
                         fill: false
                     },
                     {
                         label: 'Average Sell Listing Completed',
-                        data: data['sell_data']['data'],
+                        data: data['average_sells'],
                         borderColor: 'teal',
                         fill: false
                     }]

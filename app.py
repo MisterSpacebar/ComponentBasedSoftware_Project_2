@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = os.urandom(16).hex()
 
 
 def get_autocomplete_items():
-    data = main_functions.read_from_file("item_data.json")
+    data = main_functions.read_from_file("ComponentBasedSoftware_Project_2\item_data.json")
     autocomplete_items = []
     for item in data["data"]:
         autocomplete_items.append(item["name"])
@@ -21,7 +21,7 @@ def get_autocomplete_items():
 
 
 def get_id_by_name(name):
-    data = main_functions.read_from_file("item_data.json")
+    data = main_functions.read_from_file("ComponentBasedSoftware_Project_2\item_data.json")
     for obj in data['data']:
         if obj["name"] == name:
             return obj["id"]
@@ -63,43 +63,7 @@ def search():
 @app.route('/chart')
 def chart():
     item_id = session['item_id']
-    chart_data = historical.amalgamated_historical_data(item_id)
-
-    dates = []
-    for date in chart_data:
-        dates.append(date['date'])
-    buys = []
-    for buy in chart_data:
-        buys.append(buy["average_buys"])
-    buys_high = []
-    for high in chart_data:
-        buys_high.append(high['high_buys'])
-    sells = []
-    for sell in chart_data:
-        sells.append(sell["average_sells"])
-    buys_high = []
-    for high in chart_data:
-        buys_high.append(high['high_buys'])
-
-    buy_data = {
-        'label': 'Average Buy',
-        'data': buys,
-        'backgroundColor': 'rgba(255, 99, 132, 0.2)',
-        'borderColor': 'rgba(255, 99, 132, 1)',
-        'borderWidth': 1
-    }
-    sell_data = {
-        'label': 'Average Sell',
-        'data': sells,
-        'backgroundColor': 'rgba(54, 162, 235, 0.2)',
-        'borderColor': 'rgba(54, 162, 235, 1)',
-        'borderWidth': 1
-    }
-    data = {
-        'labels': dates,
-        'buy_data': buy_data,
-        'sell_data': sell_data
-    }
+    data = historical.amalgamated_historical_data(item_id)
 
     return jsonify(data)
 

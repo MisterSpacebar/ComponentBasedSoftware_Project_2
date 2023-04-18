@@ -20,6 +20,7 @@ def get_item_data(item_id):
         return data
     else:
         print(f"Error: {response.status_code} - {response.reason}")
+
 def amalgamated_historical_data(item_id):
     # Get the relevant dates and data
     today = datetime.date.today()
@@ -50,7 +51,21 @@ def amalgamated_historical_data(item_id):
             combined_data[item_date]["sell_quantities"].append(item["sell_quantity_min"])
 
     # Initialize the output array
-    output = []
+    output = {
+            "date": [],
+            "average_buys": [],
+            "high_buys": [],
+            "low_buys": [],
+            "average_sells": [],
+            "high_sells": [],
+            "low_sells": [],
+            "average_buy_quantities": [],
+            "max_buy_quantities": [],
+            "min_buy_quantities": [],
+            "average_sell_quantities": [],
+            "max_sell_quantities": [],
+            "min_sell_quantities": []
+        }
 
     # Loop through each date in the combined_data dictionary
     for date in combined_data:
@@ -74,20 +89,18 @@ def amalgamated_historical_data(item_id):
         min_sell_quantities = min(combined_data[date]["sell_quantities"])
 
         # Create a new object with the calculated values and add it to the output array
-        output.append({
-            "date": str(date),
-            "average_buys": average_buys,
-            "high_buys": high_buys,
-            "low_buys": low_buys,
-            "average_sells": average_sells,
-            "high_sells": high_sells,
-            "low_sells": low_sells,
-            "average_buy_quantities": average_buy_quantities,
-            "max_buy_quantities": max_buy_quantities,
-            "min_buy_quantities": min_buy_quantities,
-            "average_sell_quantities": average_sell_quantities,
-            "max_sell_quantities": max_sell_quantities,
-            "min_sell_quantities": min_sell_quantities
-        })
+        output["date"].append(str(date))
+        output["average_buys"].append(average_buys)
+        output["high_buys"].append(high_buys)
+        output["low_buys"].append(low_buys)
+        output["average_sells"].append(average_sells)
+        output["high_sells"].append(high_sells)
+        output["low_sells"].append(low_sells)
+        output["average_buy_quantities"].append(average_buy_quantities)
+        output["max_buy_quantities"].append(max_buy_quantities)
+        output["min_buy_quantities"].append(min_buy_quantities)
+        output["average_sell_quantities"].append(average_sell_quantities)
+        output["max_sell_quantities"].append(max_sell_quantities)
+        output["min_sell_quantities"].append(min_sell_quantities)
 
     return output

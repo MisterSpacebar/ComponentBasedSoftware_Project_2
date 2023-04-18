@@ -30,3 +30,13 @@
 .chart-container {
     margin-top: 10px;
 }
+
+#gw2-logo {
+    width: 300px;
+    max-height: 75%;
+}
+
+#item-icon {
+    width: 64px;
+    height: 64px;
+}
