@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = os.urandom(16).hex()
 
 
 def get_autocomplete_items():
-    data = main_functions.read_from_file("item_data.json")
+    data = main_functions.read_from_file("ComponentBasedSoftware_Project_2\item_data.json")
     autocomplete_items = []
     for item in data["data"]:
         autocomplete_items.append(item["name"])
@@ -21,7 +21,7 @@ def get_autocomplete_items():
 
 
 def get_id_by_name(name):
-    data = main_functions.read_from_file("item_data.json")
+    data = main_functions.read_from_file("ComponentBasedSoftware_Project_2\item_data.json")
     for obj in data['data']:
         if obj["name"] == name:
             return obj["id"]
