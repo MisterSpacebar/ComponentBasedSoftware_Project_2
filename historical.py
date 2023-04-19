@@ -4,6 +4,7 @@ import requests
 import json
 import main_functions
 
+# grabs pricing data for single item
 def get_historical_data(item_id):
     response = requests.get("https://api.datawars2.ie/gw2/v1/history?itemID={0}".format(item_id))
     # Returns data if success
@@ -13,14 +14,17 @@ def get_historical_data(item_id):
     else:
         print(f"Error: {response.status_code} - {response.reason}")
 
+# gets basic data for single item
 def get_item_data(item_id):
     response = requests.get("https://api.guildwars2.com/v2/items/{0}".format(item_id))
+    # returns data if success
     if response.status_code == 200:
         data = json.loads(response.content)
         return data
     else:
         print(f"Error: {response.status_code} - {response.reason}")
 
+# cleans pricing and supply&demand data
 def amalgamated_historical_data(item_id):
     # Get the relevant dates and data
     today = datetime.date.today()
@@ -50,7 +54,7 @@ def amalgamated_historical_data(item_id):
             combined_data[item_date]["buy_quantities"].append(item["buy_quantity_max"])
             combined_data[item_date]["sell_quantities"].append(item["sell_quantity_min"])
 
-    # Initialize the output array
+    # Initialize the output object
     output = {
             "date": [],
             "average_buys": [],
@@ -88,7 +92,7 @@ def amalgamated_historical_data(item_id):
         max_sell_quantities = max(combined_data[date]["sell_quantities"])
         min_sell_quantities = min(combined_data[date]["sell_quantities"])
 
-        # Create a new object with the calculated values and add it to the output array
+        # Create a new object with the calculated values and add it to the output object
         output["date"].append(str(date))
         output["average_buys"].append(average_buys)
         output["high_buys"].append(high_buys)

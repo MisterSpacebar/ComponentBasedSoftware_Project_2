@@ -3,9 +3,10 @@ $(document).ready(function(){
         type: "GET",
         url: "/chart",
         success: function(data) {
-            // Use the data to create your chart
+            // Use the data to create a chart
             console.log(data);
 
+            // Default chart template
             let ctx = document.getElementById('gw2-chart').getContext('2d');
             let myChart = new Chart(ctx, {
                 type: 'line',
@@ -47,6 +48,7 @@ $(document).ready(function(){
                 // Log the selected valueto the console
                 console.log('Selected ID: ' + selectedId);
 
+                // makes changes to the graph object
                 if(selectedId=='pricing') {
                     myChart.config.data.datasets[0].label = "Average Completed Buy Listing";
                     myChart.config.data.datasets[1].label = "Average Completed Sell Listing";
@@ -61,6 +63,7 @@ $(document).ready(function(){
                     console.log(data['average_sell_quantities'])
                 }
 
+                // update object
                 myChart.update();
             });
 

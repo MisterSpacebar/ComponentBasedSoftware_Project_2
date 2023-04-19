@@ -52,9 +52,6 @@ def index():
 @app.route('/autocomplete', methods=['GET', 'POST'])
 def autocomplete():
     items = get_autocomplete_items()
-    # query = request.form['query']
-    # results = [item for item in items if query.lower() in item.lower()]
-    # return jsonify(results)
     return items
 
 # get the string entered from the form and matches the string
