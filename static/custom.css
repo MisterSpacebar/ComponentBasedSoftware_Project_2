@@ -45,3 +45,7 @@
     width: 64px;
     height: 64px;
 }
+
+.search-form .form-group .toggle-group .btn-group {
+    width: 700px;
+}

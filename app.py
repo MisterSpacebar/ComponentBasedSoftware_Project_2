@@ -4,8 +4,6 @@ from wtforms import SubmitField, SelectField, IntegerField
 from wtforms.validators import NumberRange
 import main_functions
 import historical
-import requests
-import json
 import os
 
 # Initializes the app and assigns it a security key to protect from attacks such as CSRF
@@ -60,11 +58,13 @@ def autocomplete():
 def search():
     name = session.get('name')
     query = request.form.get('item_name')
+    duration = request.form.get('duration')
     print(query)
     # Match item to item_id
     item_id = get_id_by_name(query)
     print(item_id)
     session['item_id'] = item_id
+    session['duration'] = duration
     item_data = historical.get_item_data(item_id)
     return render_template('results.html', name=name, item_data=item_data)
 
@@ -72,7 +72,8 @@ def search():
 @app.route('/chart')
 def chart():
     item_id = session['item_id']
-    data = historical.amalgamated_historical_data(item_id)
+    duration = session['duration']
+    data = historical.amalgamated_historical_data(item_id,int(duration))
 
     return jsonify(data)
 

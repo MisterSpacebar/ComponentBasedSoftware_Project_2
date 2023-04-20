@@ -25,10 +25,10 @@ def get_item_data(item_id):
         print(f"Error: {response.status_code} - {response.reason}")
 
 # cleans pricing and supply&demand data
-def amalgamated_historical_data(item_id):
+def amalgamated_historical_data(item_id,duration):
     # Get the relevant dates and data
     today = datetime.date.today()
-    thirty_days_ago = today - datetime.timedelta(days=30)
+    thirty_days_ago = today - datetime.timedelta(days=duration)
     combined_data = {}
 
     # Send request to the API and load the data from the response

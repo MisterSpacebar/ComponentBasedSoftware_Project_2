@@ -55,8 +55,8 @@ $(document).ready(function(){
                     myChart.config.data.datasets[0].data = data['average_buys'];
                     myChart.config.data.datasets[1].data = data['average_sells'];
                 } else if(selectedId=='quantities') {
-                    myChart.config.data.datasets[0].label = "Supply";
-                    myChart.config.data.datasets[1].label = "Demand";
+                    myChart.config.data.datasets[0].label = "Quantity Listed For Purchase";
+                    myChart.config.data.datasets[1].label = "Quantity Listed For Sale";
                     myChart.config.data.datasets[0].data = data['average_sell_quantities'];
                     console.log(data['average_buy_quantities']);
                     myChart.config.data.datasets[1].data = data['average_buy_quantities'];

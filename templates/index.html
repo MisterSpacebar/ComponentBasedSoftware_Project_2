@@ -21,15 +21,29 @@
             <div class="center">
                 <a href="/"><img id="gw2-logo" src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png"></a>
                 <h3 class="page-title">Trading Post Data</h3>
+                <br>
             </div>
             <!--<input type="text" id="search-bar" class="form-control" placeholder="Search...">-->
             <div class="search-form">
                 <form type="submit" method="POST" action="/search" id="search-form">
-                    <div class="form-group input-group mb-3">
-                        <input type="text" for="item_name" name="item_name" class="form-control" id="search-bar" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
+                    <div class="form-group input-group">
+                        <div class="toggle-group">
+                            <div class="btn-group btn-group-toggle chart-toggle-group" data-toggle="buttons">
+                                <input type="text" for="item_name" name="item_name" class="form-control" id="search-bar" placeholder="Search...">
+                                <label class="btn btn-outline-danger">
+                                  <input type="radio" class='duration' name="duration" id="week" value="7" autocomplete="off"> Week
+                                </label>
+                                <label class="btn btn-outline-danger active">
+                                  <input type="radio" class='duration' name="duration" id="month" value="30" autocomplete="off" checked> Month
+                                </label>
+                                <label class="btn btn-outline-danger">
+                                    <input type="radio" class='duration' name="duration" id="year" value="365" autocomplete="off"> Year
+                                </label>
+                                <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
+                                
+                            </div>
                         </div>
+                        
                     </div>
                 </form>
             </div>
