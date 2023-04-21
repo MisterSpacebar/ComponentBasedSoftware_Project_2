@@ -15,13 +15,13 @@ $(document).ready(function(){
                     datasets: [{
                         label: "Average Completed Buy Listing",
                         data: data['average_buys'],
-                        borderColor: 'purple',
+                        borderColor: 'red',
                         fill: false
                     },
                     {
                         label: "Average Completed Sell Listing",
                         data: data['average_sells'],
-                        borderColor: 'teal',
+                        borderColor: 'darkgrey',
                         fill: false
                     }]
                 },
@@ -39,7 +39,7 @@ $(document).ready(function(){
                         }]
                     }
                 }
-            });
+            })
 
             $('.chart-option').on('change', function() {
                 // Retrieve the selected radio button's value and id
@@ -65,6 +65,27 @@ $(document).ready(function(){
 
                 // update object
                 myChart.update();
+            });
+
+            function updateHover(chart, event) {
+                var activePoints = chart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+                var firstPoint = activePoints[0];
+                if (firstPoint) {
+                  var datasetIndex = firstPoint._datasetIndex;
+                  var index = firstPoint._index;
+                  chart.updateHoverStyle(activePoints, null, true);
+                  chart.tooltip._active = [activePoints[0]];
+                  chart.tooltip.update(true);
+                } else {
+                  chart.updateHoverStyle(activePoints, null, true);
+                  chart.tooltip._active = [];
+                  chart.tooltip.update(true);
+                }
+              }
+
+            let canvas = document.getElementById('gw2-chart');
+            canvas.addEventListener('mousemove', function(event) {
+                updateHover(myChart,event);
             });
 
         },
