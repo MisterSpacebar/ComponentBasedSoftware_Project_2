@@ -4,6 +4,21 @@ import requests
 import json
 import main_functions
 
+def pricing_cleanup(num):
+    gold = num // 10000
+    silver = (num % 10000) // 100
+    bronze = num % 100
+
+    medal_strs = []
+    if gold > 0:
+        medal_strs.append("<span style='color:GoldenRod'>{0}G</span>".format(gold))
+    if silver > 0:
+        medal_strs.append("<span style='color:SlateGrey'>{0}S</span>".format(silver))
+    if bronze > 0:
+        medal_strs.append("<span style='color:Sienna'>{0}C</span>".format(bronze))
+
+    return " ".join(medal_strs)
+
 # grabs pricing data for single item
 def get_historical_data(item_id):
     response = requests.get("https://api.datawars2.ie/gw2/v1/history?itemID={0}".format(item_id))
@@ -21,6 +36,19 @@ def get_item_data(item_id):
     if response.status_code == 200:
         data = json.loads(response.content)
         return data
+    else:
+        print(f"Error: {response.status_code} - {response.reason}")
+
+def get_commerce_data(item_id):
+    response = requests.get("https://api.guildwars2.com/v2/commerce/prices/{0}".format(item_id))
+    # returns data if success
+    if response.status_code == 200:
+        data = json.loads(response.content)
+        item_pricing = {
+            "buys":pricing_cleanup(data["buys"]["unit_price"]),
+            "sells":pricing_cleanup(data["sells"]["unit_price"])
+        }
+        return item_pricing
     else:
         print(f"Error: {response.status_code} - {response.reason}")
 

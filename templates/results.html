@@ -16,48 +16,48 @@
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='search.js') }}"></script>
     <script src="{{ url_for('static', filename='chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='radio.js') }}"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="main container-lg">
-        <div class="center">
+        <div class="center result-logo">
             <a href="/"><img id="gw2-logo" src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png"></a>
-            <h3 class="page-title">Trading Post Data</h3>
             <br>
         </div>
         <div class="search-form">
             <form type="submit" method="POST" action="/search" id="search-form">
                 <div class="form-group input-group">
-                    <div class="toggle-group">
-                        <div class="btn-group btn-group-toggle chart-toggle-group" data-toggle="buttons">
-                            <input type="text" for="item_name" name="item_name" class="form-control rounded-0 rounded-left border-right-0 border-secondary" id="search-bar" placeholder="Search...">
-                            <label class="btn btn-outline-secondary">
-                              <input type="radio" class='duration' name="duration" id="week" value="7" autocomplete="off" for="search-bar"> Week
-                            </label>
-                            <label class="btn btn-outline-secondary active">
-                              <input type="radio" class='duration' name="duration" id="month" value="30" autocomplete="off" for="search-bar" checked> Month
-                            </label>
-                            <label class="btn btn-outline-secondary">
-                                <input type="radio" class='duration' name="duration" id="year" value="365" autocomplete="off" for="search-bar"> Year
-                            </label>
-                            <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
-                        </div>
+                    <div class="btn-group btn-group-toggle chart-toggle-group search-bar-group" data-toggle="buttons">
+                        <input type="text" for="item_name" name="item_name" class="form-control rounded-0 rounded-left border-right-0 border-secondary" id="search-bar" placeholder="Search...">
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" class='duration' name="duration" id="week" value="7" autocomplete="off" for="search-bar"> Week
+                        </label>
+                        <label class="btn btn-outline-secondary active">
+                            <input type="radio" class='duration' name="duration" id="month" value="30" autocomplete="off" for="search-bar" checked> Month
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" class='duration' name="duration" id="year" value="365" autocomplete="off" for="search-bar"> Year
+                        </label>
+                        <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
                     </div>
-                    <br>
                 </div>
             </form>
         </div>
+        <br>
         <div class="item-info container">
             <div class="row">
-                <div class="col-sm" style="width:30%;">
+                <div class="col-sm" style="width:25%;">
                     <img id="item-icon" src="{{ item_data.icon }}" alt="{{ item_data.name }}">
                 </div>
-                <div class="col-sm" style="width:40%;">
+                <div class="col-sm search-item-name" style="width:50%;">
                     <h3>{{ item_data.name }}</h3>
                 </div>
-                <div class="col-sm" style="width:30%;">
-                    <p></p>
+                <div class="col-sm" style="width:25%;">
+                    <h5>Current Pricing</h5>
+                    <p>Buy: {{ commerce_data.buys|safe }}</p>
+                    <p>Sell: {{ commerce_data.sells|safe }}</p>
                 </div>
             </div>
             <br>

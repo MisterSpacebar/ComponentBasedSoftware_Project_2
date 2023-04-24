@@ -15,9 +15,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='search.js') }}"></script>
+    <script src="{{ url_for('static', filename='radio.js') }}"></script>
 </head>
     <body>
-        <div class="main container-lg">
+        <div class="main index-container container-lg">
             <div class="center">
                 <a href="/"><img id="gw2-logo" src="https://wiki.guildwars2.com/images/thumb/d/df/GW2Logo_new.png/400px-GW2Logo_new.png"></a>
                 <h3 class="page-title">Trading Post Data</h3>
@@ -26,23 +27,20 @@
             <!--<input type="text" id="search-bar" class="form-control" placeholder="Search...">-->
             <div class="search-form">
                 <form type="submit" method="POST" action="/search" id="search-form">
-                    <div class="form-group input-group">
-                        <div class="toggle-group">
-                            <div class="btn-group btn-group-toggle chart-toggle-group" data-toggle="buttons">
-                                <input type="text" for="item_name" name="item_name" class="form-control rounded-0 rounded-left border-right-0 border-secondary" id="search-bar" placeholder="Search...">
-                                <label class="btn btn-outline-secondary">
-                                    <input type="radio" class='duration' name="duration" id="week" value="7" autocomplete="off" for="search-bar"> Week
-                                </label>
-                                <label class="btn btn-outline-secondary active">
-                                    <input type="radio" class='duration' name="duration" id="month" value="30" autocomplete="off" for="search-bar" checked> Month
-                                </label>
-                                <label class="btn btn-outline-secondary">
-                                    <input type="radio" class='duration' name="duration" id="year" value="365" autocomplete="off" for="search-bar"> Year
-                                </label>
-                                <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
-                            </div>
+                  <div class="form-group input-group">
+                        <div class="btn-group btn-group-toggle chart-toggle-group search-bar-group" data-toggle="buttons">
+                            <input type="text" for="item_name" name="item_name" class="form-control rounded-0 rounded-left border-right-0 border-secondary" id="search-bar" placeholder="Search...">
+                            <label class="btn btn-outline-secondary">
+                                <input type="radio" class='duration' name="duration" id="week" value="7" autocomplete="off" for="search-bar"> Week
+                            </label>
+                            <label class="btn btn-outline-secondary active">
+                                <input type="radio" class='duration' name="duration" id="month" value="30" autocomplete="off" for="search-bar" checked> Month
+                            </label>
+                            <label class="btn btn-outline-secondary">
+                                <input type="radio" class='duration' name="duration" id="year" value="365" autocomplete="off" for="search-bar"> Year
+                            </label>
+                            <button type="submit" id="search-button" class="btn btn-danger">Submit</button>
                         </div>
-                        
                     </div>
                 </form>
             </div>

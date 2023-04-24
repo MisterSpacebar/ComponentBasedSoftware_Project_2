@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = os.urandom(16).hex()
 # A list called autoComplete_items is created which then gets populated through below For Loop.
 # Items are then returned.
 def get_autocomplete_items():
-    data = main_functions.read_from_file("ComponentBasedSoftware_Project_2\item_data.json")
+    data = main_functions.read_from_file("item_data.json")
     autocomplete_items = []
     for item in data["data"]:
         autocomplete_items.append(item["name"])
@@ -27,7 +27,7 @@ def get_autocomplete_items():
 # A for loop is used to find the name that was passed through what was saved in the above json file.
 # If a match is found, it will return the ID number associated with the
 def get_id_by_name(name):
-    data = main_functions.read_from_file("ComponentBasedSoftware_Project_2\item_data.json")
+    data = main_functions.read_from_file("item_data.json")
     for obj in data['data']:
         if obj["name"] == name:
             return obj["id"]
@@ -66,7 +66,8 @@ def search():
     session['item_id'] = item_id
     session['duration'] = duration
     item_data = historical.get_item_data(item_id)
-    return render_template('results.html', name=name, item_data=item_data)
+    commerce_data = historical.get_commerce_data(item_id)
+    return render_template('results.html', name=name, item_data=item_data,commerce_data=commerce_data)
 
 # grabs the historical data and passes it to the client.
 @app.route('/chart')

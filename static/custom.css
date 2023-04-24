@@ -39,13 +39,60 @@
 #gw2-logo {
     width: 200px;
     max-height: 75%;
+    margin: 10px;
 }
 
 #item-icon {
-    width: 64px;
-    height: 64px;
+    width: 90px;
+    height: 90px;
 }
 
-.search-form .form-group .toggle-group .btn-group {
-    width: 700px;
+.search-bar-group {
+    width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 3%
+}
+
+.index-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    margin-top: -5%;
+}
+
+.search-item-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+.search-result {
+    margin-top: 25px;
+}
+
+/* Override Bootstrap radio button styles */
+.search-form .btn-group-toggle .btn input[type="radio"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+}
+
+/* Add custom radio button styles */
+.search-form .btn-group-toggle .btn input[type="radio"] + label {
+    cursor: pointer;
+}
+
+.search-form .btn-group-toggle .btn input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: #fff;
 }
