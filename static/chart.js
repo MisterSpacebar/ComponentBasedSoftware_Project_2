@@ -16,30 +16,36 @@ $(document).ready(function(){
                         label: "Average Completed Buy Listing",
                         data: data['average_buys'],
                         borderColor: 'red',
-                        fill: false
+                        fill: false,
                     },
                     {
                         label: "Average Completed Sell Listing",
                         data: data['average_sells'],
                         borderColor: 'darkgrey',
-                        fill: false
+                        fill: false,
                     }]
                 },
                 options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Double Line Chart'
+                    tooltips: {
+                      enabled: true,
+                      trigger: 'mousemove',
+                      custom: function(tooltipItem, data) {
+                        // Get the mouse position
+                        var mouseX = tooltipItem.clientX;
+              
+                        // Get the x-axis coordinate
+                        var xCoordinate = myChart.scales['x-axis-0'].getPixelForValue(mouseX);
+              
+                        // Get the y-coordinate values for both lines
+                        var yCoordinate1 = myChart.scales['y-axis-0'].getValueForPixel(xCoordinate);
+                        var yCoordinate2 = myChart.scales['y-axis-1'].getValueForPixel(xCoordinate);
+              
+                        // Display the y-coordinate values in a tooltip
+                        tooltipItem.body = `X: ${xCoordinate}<br>Y1: ${yCoordinate1}<br>Y2: ${yCoordinate2}`;
+                      },
                     },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            })
+                  },
+            });
 
             $('.chart-option').on('change', function() {
                 // Retrieve the selected radio button's value and id
@@ -93,4 +99,5 @@ $(document).ready(function(){
             console.log(error);
         }
     });
-})
+});
+

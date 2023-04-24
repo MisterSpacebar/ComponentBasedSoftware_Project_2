@@ -47,6 +47,10 @@
     height: 90px;
 }
 
+.supply-pricing {
+    margin-left:5%;
+}
+
 .search-bar-group {
     width: 800px;
     display: flex;
