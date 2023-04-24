@@ -51,6 +51,10 @@
     margin-left:5%;
 }
 
+.search-bar-input {
+    height:37px;
+}
+
 .search-bar-group {
     width: 800px;
     display: flex;
