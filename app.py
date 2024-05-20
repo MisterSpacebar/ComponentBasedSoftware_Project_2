@@ -59,10 +59,10 @@ def search():
     name = session.get('name')
     query = request.form.get('item_name')
     duration = request.form.get('duration')
-    print(query)
+    print('search query: ',query)
     # Match item to item_id
     item_id = get_id_by_name(query)
-    print(item_id)
+    print('corresponding item id: ',item_id)
     session['item_id'] = item_id
     session['duration'] = duration
     item_data = historical.get_item_data(item_id)
